@@ -4,6 +4,7 @@ import logger from "morgan";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
+import mongooseDbConnect from "./config/dbConnect.js"
 
 // routers
 import productRouter from "./router/productRouter.js";
@@ -20,6 +21,8 @@ import animalRouter from './router/animalRouter.js'
 // our own modules need to put file extension .js
 
 dotenv.config({ path: "./config.env" });
+
+mongooseDbConnect();
 
 const app = express();
 const PORT = 4000;
