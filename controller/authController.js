@@ -1,8 +1,6 @@
-// import User from "../model/User.js";
-import User from "../model/UserDB.js";
+import User from "../model/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { promisify } from "util";
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
@@ -20,46 +18,44 @@ export const login = async (req, res) => {
       .json({ message: "email and password are required!" });
   }
 
-  // check if user exists and password is correct
-  const user = await User.findOne({ email }).select("+password");
-  const match = await bcrypt.compare(password, user.password);
-  if (!user || !match) {
-    return res.status(401).json({ message: "Incorrect email or password" });
+  // check if user exists
+  let user = {};
+  try {
+    user = await User.findOne({ email: email });
+  } catch (error) {
+    return res.status(401).json(error);
   }
-  console.log(user);
 
-  const accessToken = signToken(user.id);
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    const accessToken = signToken(user.id);
 
-  const refreshToken = jwt.sign(
-    { email: user.email },
-    process.env.REFRESH_TOKEN_SECRET,
-    {
-      expiresIn: process.env.REFRESH_TOKEN_TIME,
-    }
-  );
-  user.refreshToken = refreshToken;
-  // await User.findOneAndUpdate(user.email, user);
-  await User.findOneAndUpdate(
-    { email: user.email },
-    { refreshToken: refreshToken }
-  );
+    const refreshToken = jwt.sign(
+      { email: user.email },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: process.env.REFRESH_TOKEN_TIME,
+      }
+    );
+    user.refreshToken = refreshToken;
+    const result = await User.findAndUpdate(user.email, user, true);
 
-  console.log(user);
-  const cookieOptions = {
-    httpOnly: true,
-    // secure: true,
-    sameSite: "None",
-    maxAge: 24 * 60 * 60 * 1000,
-  };
+    const cookieOptions = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 24 * 60 * 60 * 1000,
+    };
 
-  res.cookie("jwt", refreshToken, cookieOptions);
+    res.cookie("jwt", refreshToken, cookieOptions);
 
-  res.status(200).json({
-    accessToken,
-    data: {
-      user,
-    },
-  });
+    res.status(200).json({
+      accessToken,
+      data: {
+        user,
+      },
+    });
+  }
 };
 
 export const logout = async (req, res) => {
@@ -67,43 +63,32 @@ export const logout = async (req, res) => {
   if (!cookies?.jwt) return res.sendStatus(204);
   const refreshToken = cookies.jwt;
 
+  let foundUser = {};
   try {
-    const foundUser = await User.findOne({ refreshToken: refreshToken });
-
-    if (!foundUser) {
-      res.clearCookie("jwt", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "None",
-      });
-      return res.sendStatus(204);
-    }
-    await User.updateOne(
-      { _id: foundUser._id },
-      { $unset: { refreshToken: "" } }
-    );
+    foundUser = await User.findByRefreshToken(refreshToken);
+  } catch (error) {
     res.clearCookie("jwt", {
       httpOnly: true,
       secure: true,
       sameSite: "None",
     });
-    res.sendStatus(200);
-    console.log("Logout!!!");
-  } catch (error) {
-    console.error("Error during logout: ", error);
-    res.status(500).json({
-      message: "Error during logout!",
-    });
+    return res.sendStatus(204);
   }
+
+  foundUser.refreshToken = "";
+  const result = await User.findAndUpdate(foundUser.email, foundUser, true);
+  console.log("Logout: ", result);
 };
 
 export const signup = async (req, res) => {
+  const id = Math.random().toString(36).substring(2, 9);
+  const password = await bcrypt.hash(req.body.password, 12);
   let newUser = {
+    id,
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
-    bio: req.body.bio,
-    // roles: "Admin",
+    password,
+    roles: "user",
   };
 
   const accessToken = signToken(newUser.id);
@@ -116,11 +101,10 @@ export const signup = async (req, res) => {
     }
   );
   newUser.refreshToken = refreshToken;
-
-  await User.create(newUser);
+  await User.insert(newUser);
   const cookieOptions = {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,
   };
@@ -133,44 +117,4 @@ export const signup = async (req, res) => {
       newUser,
     },
   });
-};
-
-export const protect = async (req, res, next) => {
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
-
-  if (!token) {
-    return res.status(401).json({ message: "You are not logged in!" });
-  }
-
-  // verification token
-  const decoded = await promisify(jwt.verify)(
-    token,
-    process.env.ACCESS_TOKEN_SECRET
-  );
-
-  // check user exist
-  const user = await User.findById(decoded.id);
-  if (!user) {
-    return res.status(401).json({ message: "User does not exist!" });
-  }
-
-  req.user = user;
-  next();
-};
-
-export const restrictTo = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.roles)) {
-      return res.status(403).json({
-        message: "You do not have permission to perform this action!",
-      });
-    }
-    next();
-  };
 };
