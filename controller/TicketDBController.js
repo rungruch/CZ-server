@@ -71,56 +71,56 @@ export const getdate = (req, res) => {
 
 
 
-// // Update a ticket by  id 
-// export const put = (req, res) => {
-//     // Validate Request
-//     const data = req.body || {};
-//     console.log(data);
-//   if (!data || data.id != req.params.id)
-//   return res.status(422).send({ errors: "request data missmatch with body or body not found." });
-//   // Find Ticket and update it with the request body
-//     Ticket.findOneAndUpdate(
-//       { id: req.params.id },
-//       { $set: data },
-//       {
-//   upsert: false, // update only (if not found, NOT insert)
-//   // { upsert: true, // insert new if not foud
-//   returnOriginal: false, // return the new record if false otherwise the original
-//   } 
-//   )
-//   .then((ticket) => {
-//     if (!ticket) {
-// return res.status(404).send({
-// errors: "Ticket not found with id " + req.params.id,
-// }); }
-//     res.json(ticket);
-//   })
-//   .catch((err) => {
-//     if (err.kind === "ObjectId") {
-// return res.status(404).send({
-// errors: "Object not found with id " + req.params.id,
-// }); }
-// return res.status(500).send({
-// errors: "Error updating Ticket with id " + req.params.id,
-// }); });
-// };
+// Update a ticket by  id 
+export const put = (req, res) => {
+    // Validate Request
+    const data = req.body || {};
+    console.log(data);
+  if (!data || data.Ticketid != req.params.id)
+  return res.status(422).send({ errors: "request data missmatch with body or body not found." });
+  // Find Ticket and update it with the request body
+    Ticket.findOneAndUpdate(
+      { Ticketid: req.params.id },
+      { $set: data },
+      {
+  upsert: false, // update only (if not found, NOT insert)
+  // { upsert: true, // insert new if not foud
+  returnOriginal: false, // return the new record if false otherwise the original
+  } 
+  )
+  .then((ticket) => {
+    if (!ticket) {
+return res.status(404).send({
+errors: "Ticket not found with id " + req.params.id,
+}); }
+    res.json(ticket);
+  })
+  .catch((err) => {
+    if (err.kind === "ObjectId") {
+return res.status(404).send({
+errors: "Object not found with id " + req.params.id,
+}); }
+return res.status(500).send({
+errors: "Error updating Ticket with id " + req.params.id,
+}); });
+};
 
-// export const remove = (req, res) => {
-//     const data = req.body || {};
-//     console.log("Data", data);
-//     if (!data || data.id != req.params.id)
-//   return res.status(422).send({ errors: "request data missmatch with body or body not found." }); Ticket.deleteOne({ id: data.id })
-//       .then((r) => {
-//         if (r.acknowledged && r.deletedCount >= 1)
-//           return res.status(200).send({ success: true });
-//         else
-//   return res
-//   .status(200)
-//   .send({ success: "Record doesn't exist or already deleted" });
-//       })
-//       .catch((err) => {
-//         return res.status(404).send({
-//           errors: err.name,
-//   }); });
-//   };
+export const remove = (req, res) => {
+    const data = req.body || {};
+    console.log("Data", data);
+    if (!data || data.Ticketid != req.params.id)
+  return res.status(422).send({ errors: "request data missmatch with body or body not found." }); Ticket.deleteOne({ Ticketid: data.Ticketid })
+      .then((r) => {
+        if (r.acknowledged && r.deletedCount >= 1)
+          return res.status(200).send({ success: true });
+        else
+  return res
+  .status(200)
+  .send({ success: "Record doesn't exist or already deleted" });
+      })
+      .catch((err) => {
+        return res.status(404).send({
+          errors: err.name,
+  }); });
+  };
 
