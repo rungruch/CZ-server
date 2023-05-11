@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a0056"
+  },
+  "id": "1",
+  "name": "Shark Walk",
+  "detail": "The walk is both fun and adventurous, giving you an opportunity to marvel at all the sharks while learning fascinating facts about them.      Three different large interactive screens will present you with facts about all the shark species in the tanks So why not come and find out just how courageous you really are?",
+  "imgURL": "/img/assets|explore|sharkwalk-zone.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a0057"
+  },
+  "id": "2",
+  "name": "Coral Reef",
+  "detail": "Are you ready to see a rainbow? Dive into a dazzling underwater oasis and wave your fins SEA LIFE Bangkok Prepare to see hundreds of clownfish      and many more through a spectacle of shimmering colours. Discover the magic at Coral Kingdom at your visit.",
+  "imgURL": "/img/assets|explore|coralreef-zone.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a0058"
+  },
+  "id": "3",
+  "name": "Tropical Ocean",
+  "detail": "Our resident rays are particularly Native Thornback, Blonde and Painted Rays. They are native to the UK and if you want to get really                 close to our creatures then you MUST pay a visit to the Bay of Rays zone. You will get a chance to find out more about our Rays with talks                 and demos from our team of SEA LIFE experts.Most of our Rays are adults at 5-7 years old. They are not dangerous and have no venomous barb                  on the tip of their tail. They cannot generate electricity. However, they do have quite sharp ridges and spikes on their topmost sides!",
+  "imgURL": "/img/assets|explore|tropical-ocean.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a0059"
+  },
+  "id": "4",
+  "name": "Rainforest Adventure",
+  "detail": "Shhh! Can you hear that? An adventure is calling!Are you feeling brave enough to trek through the Rainforest?       Ranger Andy invites you to discover our Rainforest Adventure!       A storm has hit SEA LIFE Scarborough and Ranger Andy needs your help to unearth what lies beneath the surface of the Rainforest.",
+  "imgURL": "/img/assets|explore|rainforest.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a005a"
+  },
+  "id": "5",
+  "name": "Rockpools",
+  "detail": "Rockpools are amazing micro-habitats full of incredible creatures! Are you brave enough to stroke a Sea Anemone, Starfish or Crab? Find out during your visit!      Rockpools are made from water left behind when the tide goes out. Lots of different creatures live in these shallow pools – they all need to be tough to adapt to different       temperatures and waves crashing overhead!",
+  "imgURL": "/img/assets|explore|rockpools.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644ce4790bb02b68bd4a005b"
+  },
+  "id": "6",
+  "name": "Penguin Ice Playground",
+  "detail": "Come and check out the ever-so-cute Gentoo Penguins in our \"Ice Playground\" zone.Whether these adorable creatures are taking       a swim or just waddling around, you will be helpless against falling in love with them.Feel like you are visiting the Antarctic yourself        with the surrounding snow and cold breezes!",
+  "imgURL": "/img/assets|explore|penguin.jpg",
+  "__v": 0
+}]
