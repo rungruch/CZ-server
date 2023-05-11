@@ -22,10 +22,18 @@ export const login = async (req, res) => {
 
   // check if user exists and password is correct
   const user = await User.findOne({ email }).select("+password");
-  const match = await bcrypt.compare(password, user.password);
+  if (user) {
+  const match = await bcrypt.compare(password, user.password);  
   if (!user || !match) {
     return res.status(401).json({ message: "Incorrect email or password" });
   }
+
+}else{
+  return res.status(401).json({ message: "Incorrect email or password" });
+}
+  // if (!user || !match) {
+  //   return res.status(401).json({ message: "Incorrect email or password" });
+  // }
   console.log(user);
 
   const accessToken = signToken(user.id);

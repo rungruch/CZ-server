@@ -1,10 +1,8 @@
 // file: /config/dbConfig.js
 
-// import dotenv from "dotenv";
-// dotenv.config({ path: "./config.env" });
+import dotenv from "dotenv";
+dotenv.config({ path: "./config.env" });
 
-
-// let dbURI = "mongodb+srv://rungruch2543:aaAAbbBB55@cluster0.4urxic8.mongodb.net/?retryWrites=true&w=majority";
 let dbURI = "mongodb://127.0.0.1:27017/myDB";
 if (process.env.NODE_ENV === "production") {
   // production DB server
