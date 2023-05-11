@@ -4,7 +4,8 @@ import logger from "morgan";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
-import mongooseDbConnect from "./config/dbConnect.js"
+import mongooseDbConnect from "./config/dbConnect.js";
+import cookieParser from "cookie-parser";
 
 // routers
 import productRouter from "./router/productRouter.js";
@@ -15,9 +16,9 @@ import zoneRouter from "./router/zoneRouter.js";
 import sectionRouter from "./router/sectionRouter.js";
 import authRouter from "./router/authRouter.js";
 
-import transactionRouter from './router/transactionRouter.js'
-import ticketRouter from './router/ticketRouter.js'
-import animalRouter from './router/animalRouter.js'
+import transactionRouter from "./router/transactionRouter.js";
+import ticketRouter from "./router/ticketRouter.js";
+import animalRouter from "./router/animalRouter.js";
 // our own modules need to put file extension .js
 
 dotenv.config({ path: "./config.env" });
@@ -25,6 +26,7 @@ dotenv.config({ path: "./config.env" });
 mongooseDbConnect();
 
 const app = express();
+app.use(cookieParser());
 const PORT = 4000;
 
 // middleware logger
@@ -45,9 +47,9 @@ app.use("/api/zones", zoneRouter);
 app.use("/api/sections", sectionRouter);
 app.use("/auth", authRouter);
 
-app.use('/api/transactions',transactionRouter);
+app.use("/api/transactions", transactionRouter);
 app.use("/api/ticket", ticketRouter);
-app.use('/api/animals',animalRouter);
+app.use("/api/animals", animalRouter);
 
 app.get("/", (req, res) => {
   res.status(401).send({ error: "Invalid Endport" });
