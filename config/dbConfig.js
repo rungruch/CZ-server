@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 
 let dbURI = "mongodb://127.0.0.1:27017/myDB";
+// let dbURI = "mongodb+srv://aqaccess:v27CXkwfjfxaHfHl@cluster0.ycogb7a.mongodb.net/?retryWrites=true&w=majority";
 if (process.env.NODE_ENV === "production") {
   // production DB server
   dbURI = process.env.MONGO_URI ? process.env.MONGO_URI : dbURI;
