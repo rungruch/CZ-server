@@ -19,6 +19,8 @@ import authRouter from "./router/authRouter.js";
 import transactionRouter from "./router/transactionRouter.js";
 import ticketRouter from "./router/ticketRouter.js";
 import animalRouter from "./router/animalRouter.js";
+import User from "./model/UserDB.js";
+import UserRouter from "./router/UserRouter.js";
 // our own modules need to put file extension .js
 
 dotenv.config({ path: "./config.env" });
@@ -46,6 +48,7 @@ app.use("/api/news", newsRouter);
 app.use("/api/zones", zoneRouter);
 app.use("/api/sections", sectionRouter);
 app.use("/auth", authRouter);
+app.use("/api/user", UserRouter);
 
 app.use("/api/transactions", transactionRouter);
 app.use("/api/ticket", ticketRouter);

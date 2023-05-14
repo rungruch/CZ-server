@@ -5,6 +5,6 @@ let router = express.Router();
 
 router.post('/', create);
 router.get('/', list);
-router.get('/:email', get);
+router.get('/:id', get);
 
 export default router;

@@ -40,12 +40,12 @@ errors: "Some error occurred while retrieving",
 
 // Find a zone with an id
 export const get = (req, res) => {
-  const email = req.params.email;
-  Transaction.find({ email: email })
+  const id = req.params.id;
+  Transaction.find({ idref: id })
   .then((transaction) => {
     if (!transaction) {
       return res.status(404).send({
-        errors: "transaction not found with email " + id,
+        errors: "transaction not found with id " + id,
 }); }
     res.json(transaction); // default status = 200
   })
