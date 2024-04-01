@@ -6,6 +6,7 @@ import fs from "fs";
 import dotenv from "dotenv";
 import mongooseDbConnect from "./config/dbConnect.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 // routers
 import productRouter from "./router/productRouter.js";
