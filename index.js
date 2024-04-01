@@ -27,7 +27,9 @@ dotenv.config({ path: "./config.env" });
 
 mongooseDbConnect();
 
+
 const app = express();
+app.use(cors());
 app.use(cookieParser());
 const PORT = process.env.port || 8080;
 
