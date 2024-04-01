@@ -29,7 +29,7 @@ mongooseDbConnect();
 
 const app = express();
 app.use(cookieParser());
-const PORT = normalizePort(process.env.PORT || '3000');
+const PORT = process.env.port || 8080;
 
 // middleware logger
 app.use(logger("short"));
