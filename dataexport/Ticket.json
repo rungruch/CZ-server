@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "645ca4a3c23e62679f4bf471"
+  },
+  "Ticketid": "10000",
+  "TicketType": "Individual",
+  "Date": "2023-04-23",
+  "Price": 400,
+  "Remaining": 90,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645ca901a9e50e25b2e2dace"
+  },
+  "Ticketid": "10001",
+  "TicketType": "Family",
+  "Date": "2023-04-23",
+  "Price": 900,
+  "Remaining": 89,
+  "__v": 0
+}]

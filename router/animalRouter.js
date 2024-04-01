@@ -1,8 +1,10 @@
-import express from "express";
-import { list } from "../controller/animalsController.js";
+import express from 'express';
+import { create,list } from '../controller/animalsDBController.js';
 
-let router = express.Router();
+const router = express.Router();
 
-router.get("/",list);
+router.get('/',list);
+router.post('/',create);
 
-export default router;
+
+export default router

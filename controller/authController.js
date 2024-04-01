@@ -34,8 +34,7 @@ export const login = async (req, res) => {
   // if (!user || !match) {
   //   return res.status(401).json({ message: "Incorrect email or password" });
   // }
-  console.log(user);
-
+  // console.log(user);
   const accessToken = signToken(user.id);
 
   const refreshToken = jwt.sign(
@@ -182,3 +181,4 @@ export const restrictTo = (...roles) => {
     next();
   };
 };
+

@@ -69,6 +69,23 @@ export const getdate = (req, res) => {
       });
 }); };
 
+// Find a ticket with date
+export const getdatetype = (req, res) => {
+  const TicketType = req.params.TicketType;
+  const date = req.params.Date;
+Ticket.find({ Date: date, TicketType: TicketType })
+  .then((ticket) => {
+    if (!ticket || ticket.length == 0) {
+      return res.status(404).send({
+        errors: "Ticket not found with date: " + date,
+}); }
+    res.json(ticket); // default status = 200
+  })
+  .catch((err) => {
+    return res.status(400).send({
+      errors: "Error retrieving ticket with date " + date,
+    });
+}); };
 
 
 // Update a ticket by  id 
