@@ -3,7 +3,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 
-let uri = "mongodb+srv://aqaccess:v27CXkwfjfxaHfHl@cluster0.ycogb7a.mongodb.net/?retryWrites=true&w=majority";
+let uri = "mongodb+srv://noconfidentialsdataanyways:noconfidentialsdataanyways@cluster0.4urxic8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // let dbURI = "mongodb://127.0.0.1:27017/myDB";
 // // let dbURI = "mongodb+srv://aqaccess:v27CXkwfjfxaHfHl@cluster0.ycogb7a.mongodb.net/?retryWrites=true&w=majority";
 // if (process.env.NODE_ENV === "production") {
