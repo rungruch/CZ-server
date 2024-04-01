@@ -5,7 +5,7 @@ const newsdata = [
       eventLocation:'Center Dome',
       eventtime:'3:00 PM',
       eventShortHeadlline:'Dolphins are the most intelligent creatures on earth',
-      animalUrl:'/img/assets|main|dolphin.png',
+      animalUrl:'https://cz-server-rungruch.azurewebsites.net/img/assets|main|dolphin.png',
     },
     {
         id:'2',
@@ -13,7 +13,7 @@ const newsdata = [
         eventLocation:'Penguin Ice playground',
         eventtime:'11:00 AM',
         eventShortHeadlline:'Penguins are the most adorable creatures on earth',
-        animalUrl:'/img/assets|main|penguin.png',
+        animalUrl:'https://cz-server-rungruch.azurewebsites.net/img/assets|main|penguin.png',
     },
     {
         id:'3',
@@ -21,7 +21,7 @@ const newsdata = [
         eventLocation:'Shark Walk',
         eventtime:'12:00 PM',
         eventShortHeadlline:'Sharks are the most dangerous creatures on earth',
-        animalUrl:'/img/assets|main|shark.png',
+        animalUrl:'https://cz-server-rungruch.azurewebsites.net/img/assets|main|shark.png',
     }
   ];
     
